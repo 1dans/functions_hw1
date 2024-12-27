@@ -5,166 +5,197 @@
 using namespace std; 
 #define e cout<<endl
 // void minMax(int* ptr, int size); // #1
-//void fillArray(int* ptr, int size); // #1, #2, #3 
+void fillArray(int* ptr, int size); // #1, #2, #3, #5 
 //void displayArray(int* ptr, int size); // #1, #2, #3
 // void negPosZero(int* ptr, int size); // #2
-// void sortingArray(int* ptr, int size, int choice = 1);
+// void sortingArray(int* ptr, int size, int choice = 1); // #3
 //bool comp(int a, int b) { // #3
 //	return a > b;
 //} 
 
-void show_cubes(int cube) {
-	e;
-	if (cube == 1) {
-		cout << "   ";
-		e;
-		cout << " * ";
-		e;
-		cout << "   ";
-		e;
-	}
-	if (cube == 2) {
-		cout << "*   ";
-		e;
-		cout << "   *";
-		e;
-	}
-	if (cube == 3) {
-		cout << "*   ";
-		e;
-		cout << " * ";
-		e;
-		cout << "   *";
-		e;
-	}
-	if (cube == 4) {
-		cout << "* *";
-		e;
-		cout << "* *";
-		e;
-	}
-	if (cube == 5) {
-		cout << "* *";
-		e;
-		cout << " * ";
-		e;
-		cout << "* *";
-		e;
-	}
-	if (cube == 6) {
-		cout << "* * *";
-		e;
-		cout << "* * *";
-		e;
-	}
+//void show_cubes(int cube) { // #4
+//	e;
+//	if (cube == 1) {
+//		cout << "   ";
+//		e;
+//		cout << " * ";
+//		e;
+//		cout << "   ";
+//		e;
+//	}
+//	if (cube == 2) {
+//		cout << "*   ";
+//		e;
+//		cout << "   *";
+//		e;
+//	}
+//	if (cube == 3) {
+//		cout << "*   ";
+//		e;
+//		cout << " * ";
+//		e;
+//		cout << "   *";
+//		e;
+//	}
+//	if (cube == 4) {
+//		cout << "* *";
+//		e;
+//		cout << "* *";
+//		e;
+//	}
+//	if (cube == 5) {
+//		cout << "* *";
+//		e;
+//		cout << " * ";
+//		e;
+//		cout << "* *";
+//		e;
+//	}
+//	if (cube == 6) {
+//		cout << "* * *";
+//		e;
+//		cout << "* * *";
+//		e;
+//	}
+//}
+// 
+//int bot_move() { // #4
+//	cout << "Bot's move... ";
+//	Sleep(700);
+//	e;
+//	int cube = 1 + rand() % 6;
+//	cout << cube << '!';
+//	Sleep(700);
+//	show_cubes(cube);
+//	Sleep(700);
+//	return cube;
+//}
+//int user_move() {
+//	cout << "Your move... ";
+//	Sleep(700);
+//	e;
+//	int cube = 1 + rand() % 6;
+//	cout << cube << '!';
+//	Sleep(700);
+//	show_cubes(cube);
+//	Sleep(700);
+//	return cube;
+//}
+//
+//
+//
+//
+//
+//void results(int user_score, int bot_score); // #4
+//
+//void process(int move) { // #4
+//	e;
+//	int cube, bot_score = 0, user_score = 0;
+//	if (move == 0) {
+//		for (int i = 0; i < 5; ++i) {
+//			bot_score += bot_move();
+//			e;
+//			user_score += user_move();
+//			e;
+//			cout << "Bot's score now is " << bot_score << ". Yours is " << user_score << '.';
+//			Sleep(1200);
+//			e;
+//		}
+//	}
+//	if (move == 1) {
+//		for (int i = 0; i < 5; ++i) {
+//			user_score += user_move();
+//			e;
+//			bot_score += bot_move();
+//			e;
+//			cout << "Your score now is " << user_score << ". Bot's is " << bot_score << '.';
+//			Sleep(1200);
+//			e;
+//		}
+//	}
+//	results(user_score, bot_score);
+//}
+//
+//void start() { // #4 
+//	cout << "Starting! Let's decide who moves first";
+//	Sleep(900);
+//	e;
+//	int random = rand() % 2;
+//	if (random == 0) {
+//		cout << "Bot starts first!";
+//		process(random);
+//	}
+//	else { cout << "You start first!"; process(random); }
+//}
+//
+//void game(char choice, int bot_result=0, int user_result=0, string winner="none"); // #4 
+//
+//void menu(int bot_result=0, int user_result=0, string winner="none") { // #4
+//	e;
+//	int menu_size = 40;
+//	for (int i = 0; i < menu_size; ++i) cout << '=';
+//	e;
+//	cout << setw(30) << "Hi! Welcome to Cube game" << endl;
+//	for (int i = 0; i < menu_size; ++i) cout << '=';
+//	e;
+//	cout << setw(25) << "MAIN MENU";
+//	e;
+//	cout << "Start the game - 'p'";
+//	e;
+//	cout << "Previous game score - 'w'";
+//	e;
+//	cout << "Quit - 'q'";
+//	char choice;
+//	e;
+//	cin >> choice;
+//	choice = tolower(choice);
+//	game(choice, bot_result, user_result, winner);
+//
+//}
+
+int recurSum(int* ptr, int index, int sum, int starting_index) {
+	if (index == (starting_index + 9)) return sum;
+	sum += ptr[index];
+	return recurSum(ptr, index + 1, sum, starting_index);
 }
 
-int bot_move() {
-	cout << "Bot's move... ";
-	Sleep(700);
-	e;
-	int cube = 1 + rand() % 6;
-	cout << cube << '!';
-	Sleep(700);
-	show_cubes(cube);
-	Sleep(700);
-	return cube;
-}
-int user_move() {
-	cout << "Your move... ";
-	Sleep(700);
-	e;
-	int cube = 1 + rand() % 6;
-	cout << cube << '!';
-	Sleep(700);
-	show_cubes(cube);
-	Sleep(700);
-	return cube;
-}
-
-
-
-
-
-void results(int user_score, int bot_score);
-
-void process(int move) {
-	e;
-	int cube, bot_score = 0, user_score = 0;
-	if (move == 0) {
-		for (int i = 0; i < 5; ++i) {
-			bot_score += bot_move();
-			e;
-			user_score += user_move();
-			e;
-			cout << "Bot's score now is " << bot_score << ". Yours is " << user_score << '.';
-			Sleep(1200);
-			e;
+void Sum(int* ptr, int size) {
+	int min = 100, index_sum, min_index = 0;
+	for (int i = 0; i < 92; ++i) {
+		int current_sum = 0;
+		index_sum = recurSum(ptr, i, current_sum, i);
+		if (index_sum < min) {
+			min_index = i;
+			min = index_sum;
 		}
 	}
-	if (move == 1) {
-		for (int i = 0; i < 5; ++i) {
-			user_score += user_move();
-			e;
-			bot_score += bot_move();
-			e;
-			cout << "Your score now is " << user_score << ". Bot's is " << bot_score << '.';
-			Sleep(1200);
-			e;
+	cout << "Position of the num with which the smallest sequence starts is " << min_index + 1;
+}
+
+void displayMatrix(int* ptr, int size) { // #5 
+	for (int i = 0; i < 10; ++i) {
+		for (int j = 0; j < 10; ++j) {
+			cout << setw(5)<< ptr[(i*10) + j] << ' ';
 		}
+		e;
 	}
-	results(user_score, bot_score);
-}
-
-void start() {
-	cout << "Starting! Let's decide who moves first";
-	Sleep(900);
-	e;
-	int random = rand() % 2;
-	if (random == 0) {
-		cout << "Bot starts first!";
-		process(random);
-	}
-	else { cout << "You start first!"; process(random); }
-}
-
-void game(char choice, int bot_result=0, int user_result=0, string winner="none");
-
-void menu(int bot_result=0, int user_result=0, string winner="none") {
-	e;
-	int menu_size = 40;
-	for (int i = 0; i < menu_size; ++i) cout << '=';
-	e;
-	cout << setw(30) << "Hi! Welcome to Cube game" << endl;
-	for (int i = 0; i < menu_size; ++i) cout << '=';
-	e;
-	cout << setw(25) << "MAIN MENU";
-	e;
-	cout << "Start the game - 'p'";
-	e;
-	cout << "Previous game score - 'w'";
-	e;
-	cout << "Quit - 'q'";
-	char choice;
-	e;
-	cin >> choice;
-	choice = tolower(choice);
-	game(choice, bot_result, user_result, winner);
-
 }
 
 int main()
 {
 	srand(time(nullptr));
-	menu(0, 0, "none");
-	cout << "Quitting! ;(. We'll wait for you next time";
-	return 0;
+	//menu(0, 0, "none");
+	//cout << "Quitting! ;(. We'll wait for you next time";
+	//return 0;
 	// int size = 3; // #1
 	// int size = 10; // #3
+	int size = 100; // #5
 	/*cout << "Enter the size of the array: ";
 	cin >> size;*/ //#2
-	//int* ptr = new int[size]; // #1, #2, #3
-	//fillArray(ptr, size); // #1, #2, #3
+	int* ptr = new int[size]; // #1, #2, #3 #5
+	fillArray(ptr, size); // #1, #2, #3 #5 
+	displayMatrix(ptr, size);
+	Sum(ptr, size);
 	//displayArray(ptr, size); // #1, #2, #3
 	// sortingArray(ptr, size); // #3
 	// negPosZero(ptr, size); //#2
@@ -172,72 +203,72 @@ int main()
 
 }
 
-void game(char choice, int bot_result, int user_result, string winner) {
-	if (choice == 'q' || choice == 'n') return;
-	else if (choice == 'w') {
-		if (winner == "none") {
-			cout << "You haven't played yet! Wanna start a game? y/n";
-			while (choice == 'n' || choice == 'q' || choice == 'y') {
-				e;
-				cin >> choice;
-				choice = tolower(choice);
-				if (choice == 'n' || choice == 'q') return;
-				if (choice == 'y') game(choice);
-				else cout << "I don't understand you :(. Try again?";
-			}
-		}
-		else cout << "Your previous score was " << user_result << ". Bot's was " << bot_result << ". It's a "<<winner<<'.'; menu();
-	}
-	else if (choice == 'p' || choice == 'y') {
-		start();
-	}
-	else {
-		while (true) {
-			cout << "I don't understand you :(. Wanna start a game? y/n";
-			e;
-			cin >> choice;
-			choice = tolower(choice);
-			game(choice);
-		}
-	}
-}
-
-void results(int user_score, int bot_score) {
-	string winner;
-	cout << "By the end of the game, the winner is... ";
-	Sleep(1200);
-	if (user_score > bot_score) { 
-		cout << "You!!!";
-		winner = "win";
-	}
-	else if (bot_score > user_score) { 
-		cout << "Bot! Good luck next time.";
-		winner = "loss";
-	}
-	else if (bot_score == user_score) {
-		cout << "It's a tie!";
-		winner = "tie";
-	}
-	e;
-	cout << "Wanna go back to menu? y/n";
-	char choice;
-	while (choice != 'y' || choice != 'n' || choice != 'q') {
-		e;
-		cin >> choice;
-		choice = tolower(choice);
-		if (choice == 'y') menu(bot_score, user_score, winner);
-		else if (choice == 'n' || choice == 'q') return;
-		else cout << "I don't understand you, try again.";
-		
-	}
-}
-//void fillArray(int* ptr, int size) // #1, #2, #3
-//{
-//	for (int i = 0; i < size; ++i) {
-//		ptr[i] = -5 + rand() % 11;
+//void game(char choice, int bot_result, int user_result, string winner) { // #4
+//	if (choice == 'q' || choice == 'n') return;
+//	else if (choice == 'w') {
+//		if (winner == "none") {
+//			cout << "You haven't played yet! Wanna start a game? y/n";
+//			while (choice != 'n' || choice != 'q' || choice != 'y') {
+//				e;
+//				cin >> choice;
+//				choice = tolower(choice);
+//				if (choice == 'n' || choice == 'q') return;
+//				if (choice == 'y') game(choice);
+//				else cout << "I don't understand you :(. Try again?";
+//			}
+//		}
+//		else cout << "Your previous score was " << user_result << ". Bot's was " << bot_result << ". It's a "<<winner<<'.'; menu();
 //	}
-//
+//	else if (choice == 'p' || choice == 'y') {
+//		start();
+//	}
+//	else {
+//		while (choice != 'n' || choice != 'q' || choice != 'y') {
+//			cout << "I don't understand you :(. Wanna start a game? y/n";
+//			e;
+//			cin >> choice;
+//			choice = tolower(choice);
+//			game(choice);
+//		}
+//	}
 //}
+//
+//void results(int user_score, int bot_score) { // #4
+//	string winner;
+//	cout << "By the end of the game, the winner is... ";
+//	Sleep(1200);
+//	if (user_score > bot_score) { 
+//		cout << "You!!!";
+//		winner = "win";
+//	}
+//	else if (bot_score > user_score) { 
+//		cout << "Bot! Good luck next time.";
+//		winner = "loss";
+//	}
+//	else if (bot_score == user_score) {
+//		cout << "It's a tie!";
+//		winner = "tie";
+//	}
+//	e;
+//	cout << "Wanna go back to menu? y/n";
+//	char choice;
+//	while (choice != 'y' || choice != 'n' || choice != 'q') {
+//		e;
+//		cin >> choice;
+//		choice = tolower(choice);
+//		if (choice == 'y') menu(bot_score, user_score, winner);
+//		else if (choice == 'n' || choice == 'q') return;
+//		else cout << "I don't understand you, try again.";
+//		
+//	}
+//}
+void fillArray(int* ptr, int size) // #1, #2, #3, #5
+{
+	for (int i = 0; i < size; ++i) {
+		ptr[i] = rand() % 2;
+	}
+
+}
 //void displayArray(int* ptr, int size) // #1, #2, #3
 //{
 //	for (int i = 0; i < size; ++i) {
