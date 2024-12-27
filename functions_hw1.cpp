@@ -13,6 +13,7 @@ using namespace std;
 //} 
 
 void show_cubes(int cube) {
+	e;
 	if (cube == 1) {
 		cout << "   ";
 		e;
@@ -120,6 +121,7 @@ void start() {
 void game(char choice, int bot_result=0, int user_result=0, string winner="none");
 
 void menu(int bot_result=0, int user_result=0, string winner="none") {
+	e;
 	int menu_size = 40;
 	for (int i = 0; i < menu_size; ++i) cout << '=';
 	e;
@@ -173,7 +175,7 @@ void game(char choice, int bot_result, int user_result, string winner) {
 				else cout << "I don't understand you :(. Try again?";
 			}
 		}
-		else cout << "Your previous score was " << user_result << ". Bot's was " << bot_result; menu();
+		else cout << "Your previous score was " << user_result << ". Bot's was " << bot_result << ". It's a "<<winner<<'.'; menu();
 	}
 	else if (choice == 'p' || choice == 'y') {
 		start();
@@ -192,8 +194,18 @@ void game(char choice, int bot_result, int user_result, string winner) {
 void results(int user_score, int bot_score) {
 	string winner;
 	cout << "By the end of the game, the winner is... ";
-	if (user_score > bot_score) cout << "You!!!"; winner = "won";
-	if (bot_score > user_score) cout << "Bot! Good luck next time."; winner = "lost";
+	if (user_score > bot_score) { 
+		cout << "You!!!";
+		winner = "win";
+	}
+	else if (bot_score > user_score) { 
+		cout << "Bot! Good luck next time.";
+		winner = "loss";
+	}
+	else if (bot_score == user_score) {
+		cout << "It's a tie!";
+		winner = "tie";
+	}
 	e;
 	cout << "Wanna go back to menu? y/n";
 	e;
@@ -201,7 +213,7 @@ void results(int user_score, int bot_score) {
 	while (true) {
 		cin >> choice;
 		choice = tolower(choice);
-		if (choice == 'y') menu(user_score, bot_score);
+		if (choice == 'y') menu(bot_score, user_score, winner);
 		else if (choice == 'n') return;
 		else cout << "I don't understand you, try again.";
 	}
