@@ -1,21 +1,27 @@
 #include <iostream>
+#include <algorithm>
 using namespace std; 
 
 // void minMax(int* ptr, int size); // #1
 void fillArray(int* ptr, int size);
 void displayArray(int* ptr, int size);
 // void negPosZero(int* ptr, int size); // #2
+void sortingArray(int* ptr, int size, int choice = 1);
+bool comp(int a, int b) {
+	return a > b;
+}
 
 int main()
 {
 	srand(time(nullptr));
 	// int size = 3; // #1
-	int size = 10; // #3
+	int size = 10; // #3 // #3 
 	/*cout << "Enter the size of the array: ";
 	cin >> size;*/ //#2
 	int* ptr = new int[size];
 	fillArray(ptr, size);
 	displayArray(ptr, size);
+	sortingArray(ptr, size);
 	// negPosZero(ptr, size); //#2
 	// minMax(ptr, size); #1
 
@@ -33,6 +39,18 @@ void displayArray(int* ptr, int size)
 		cout << ptr[i] << ' ';
 	}
 	cout << endl;
+}
+
+void sortingArray(int* ptr, int size, int choice) //#3
+{
+	if (choice == 0) {
+		sort(ptr, ptr + size);
+	}
+	else if (choice == 1) {
+		sort(ptr, ptr + size, comp);
+	}
+	else cout << "Error.";
+	displayArray(ptr, size);
 }
 
 //void negPosZero(int* ptr, int size) // #2
