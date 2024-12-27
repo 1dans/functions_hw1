@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <iomanip>
+#include <windows.h>
 using namespace std; 
 #define e cout<<endl
 // void minMax(int* ptr, int size); // #1
@@ -60,18 +61,24 @@ void show_cubes(int cube) {
 
 int bot_move() {
 	cout << "Bot's move... ";
+	Sleep(700);
 	e;
 	int cube = 1 + rand() % 6;
 	cout << cube << '!';
+	Sleep(700);
 	show_cubes(cube);
+	Sleep(700);
 	return cube;
 }
 int user_move() {
 	cout << "Your move... ";
+	Sleep(700);
 	e;
 	int cube = 1 + rand() % 6;
 	cout << cube << '!';
+	Sleep(700);
 	show_cubes(cube);
+	Sleep(700);
 	return cube;
 }
 
@@ -91,6 +98,7 @@ void process(int move) {
 			user_score += user_move();
 			e;
 			cout << "Bot's score now is " << bot_score << ". Yours is " << user_score << '.';
+			Sleep(1200);
 			e;
 		}
 	}
@@ -101,6 +109,7 @@ void process(int move) {
 			bot_score += bot_move();
 			e;
 			cout << "Your score now is " << user_score << ". Bot's is " << bot_score << '.';
+			Sleep(1200);
 			e;
 		}
 	}
@@ -109,6 +118,7 @@ void process(int move) {
 
 void start() {
 	cout << "Starting! Let's decide who moves first";
+	Sleep(900);
 	e;
 	int random = rand() % 2;
 	if (random == 0) {
@@ -167,11 +177,12 @@ void game(char choice, int bot_result, int user_result, string winner) {
 	else if (choice == 'w') {
 		if (winner == "none") {
 			cout << "You haven't played yet! Wanna start a game? y/n";
-			while (true) {
+			while (choice == 'n' || choice == 'q' || choice == 'y') {
 				e;
 				cin >> choice;
 				choice = tolower(choice);
-				if (choice == 'n' || choice == 'y') game(choice);
+				if (choice == 'n' || choice == 'q') return;
+				if (choice == 'y') game(choice);
 				else cout << "I don't understand you :(. Try again?";
 			}
 		}
@@ -194,6 +205,7 @@ void game(char choice, int bot_result, int user_result, string winner) {
 void results(int user_score, int bot_score) {
 	string winner;
 	cout << "By the end of the game, the winner is... ";
+	Sleep(1200);
 	if (user_score > bot_score) { 
 		cout << "You!!!";
 		winner = "win";
@@ -208,14 +220,15 @@ void results(int user_score, int bot_score) {
 	}
 	e;
 	cout << "Wanna go back to menu? y/n";
-	e;
 	char choice;
-	while (true) {
+	while (choice != 'y' || choice != 'n' || choice != 'q') {
+		e;
 		cin >> choice;
 		choice = tolower(choice);
 		if (choice == 'y') menu(bot_score, user_score, winner);
-		else if (choice == 'n') return;
+		else if (choice == 'n' || choice == 'q') return;
 		else cout << "I don't understand you, try again.";
+		
 	}
 }
 //void fillArray(int* ptr, int size) // #1, #2, #3
